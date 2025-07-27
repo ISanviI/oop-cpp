@@ -7,7 +7,7 @@ using namespace std;
 
 // Modes of inheritance:
 // Base   ---   Private         Protected       Public
-// Derived  
+// Derived
 //    |
 // Public       Not Inherited   Protected       Public
 // Protected    Not Inherited   protected      Protected
@@ -23,36 +23,70 @@ using namespace std;
 // 4. Hierarchical inheritance - Multiple child classes inherit from one parent class.
 // 5. Hybrid inheritance - Combination of multiple and multi-level inheritance.
 
-
-class Person {
+class Person
+{
 public:
   string name;
   int age;
 
   // If parameterized constructor defined in parent class.
-  Person(string name, int age) {
+  Person(string name, int age)
+  {
     this->name = name;
     this->age = age;
   }
 };
 
-class Student : public Person {
+class Student : public Person
+{
 public:
   int grade;
   string rollNo;
 
   // If parameterized constructor defined in parent class.
-  Student(string name, int age, int grade, string rollNo) : Person(name, age) {
+  Student(string name, int age, int grade, string rollNo) : Person(name, age)
+  {
     this->grade = grade;
     this->rollNo = rollNo;
   }
 
-  void display() {
+  void display()
+  {
     cout << "Name: " << name << ", Age: " << age << ", Grade: " << grade << ", Roll No: " << rollNo << endl;
   }
 };
 
-int main() {
+// Diamond Problem Example - Multiple Inheritance
+// In this example, class A is the base class, and classes B and C inherit from A. Class D inherits from both B and C.
+// This can lead to ambiguity if not handled properly, which is why virtual inheritance is used.
+// Method I: Use scope resolution operator to specify through which base class should the member be accessed.
+// Method II: Use virtual inheritance to avoid ambiguity.
+class A
+{
+public:
+  int x;
+};
+
+class B : virtual public A
+{ // Virtual inheritance
+public:
+  // ...
+};
+
+class C : virtual public A
+{ // Virtual inheritance
+public:
+  // ...
+};
+
+class D : public B, public C
+{
+public:
+  // ...
+};
+
+int main()
+{
 
   // If non-parameterized or default constructor defined in parent class.
   // Student s1;
